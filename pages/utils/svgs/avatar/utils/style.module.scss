@@ -1,0 +1,6 @@
+.avatarStyles {
+  @import "../../styles";
+  @include useSVG;
+  width: 1.875rem;
+  height: 1.875rem;
+}

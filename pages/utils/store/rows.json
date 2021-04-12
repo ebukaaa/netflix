@@ -1,0 +1,34 @@
+[
+  {
+    "title": "NETFLIX ORIGINALS",
+    "isLarge": true,
+    "fetch": "originalsResults"
+  },
+  { "title": "Trending Now", "isLarge": false, "fetch": "trendingResults" },
+  { "title": "Top Rated", "isLarge": false, "fetch": "topRatedResults" },
+  {
+    "title": "Action Movies",
+    "isLarge": false,
+    "fetch": "actionMoviesResults"
+  },
+  {
+    "title": "Comedy Movies",
+    "isLarge": false,
+    "fetch": "comedyMoviesResults"
+  },
+  {
+    "title": "Horror Movies",
+    "isLarge": false,
+    "fetch": "horrorMoviesResults"
+  },
+  {
+    "title": "Romance Movies",
+    "isLarge": false,
+    "fetch": "romanceMoviesResults"
+  },
+  {
+    "title": "Documentaries",
+    "isLarge": false,
+    "fetch": "documentariesResults"
+  }
+]

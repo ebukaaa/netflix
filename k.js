@@ -1,15 +1,12 @@
 import { useProps as appProps, useStore } from "./utils";
 
 export function useHome(props) {
-  const { homeStyles, rows, Header, Banner, Row } = useStore({ data: props });
+  const { homeStyles, Header, Banner } = useStore({ data: props });
 
   return (
     <main className={homeStyles}>
       <Header />
       <Banner />
-      {rows.map(({ title, isLarge, fetch }) => (
-        <Row key={title} title={title} isLarge={isLarge} fetch={fetch} />
-      ))}
     </main>
   );
 }
