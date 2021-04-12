@@ -32,7 +32,7 @@ export async function getStaticProps() {
   const { results: originalsResults } = await orginalsResponse.json();
   const { floor, random } = Math;
   const originalsMovie =
-    originalsResults[floor(random() * originalsResults?.length - 1)];
+    originalsResults[floor(random() * originalsResults?.length - 1)] || {};
 
   const trendingResponse = await fetch(process.env.TMDB_URL + trending);
   const { results: trendingResults } = await trendingResponse.json();
