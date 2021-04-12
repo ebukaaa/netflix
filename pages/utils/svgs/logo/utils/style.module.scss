@@ -1,0 +1,10 @@
+.logoStyles {
+  @import "../../styles";
+  @include useSVG;
+  width: 5rem;
+
+  path {
+    $amaranth-red: #d8232a;
+    fill: $amaranth-red;
+  }
+}
