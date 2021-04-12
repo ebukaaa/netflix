@@ -16,7 +16,7 @@ export function useStore() {
       () => ({
         bannerStyles,
         extraStyles: {
-          backgroundImage: `url('${process.env.NEXT_PUBLIC_tmdbImageURL}${originalsMovie?.backdrop_path}')`,
+          backgroundImage: `url('${process.env.NEXT_PUBLIC_TMDB_IMAGE_URL}${originalsMovie?.backdrop_path}')`,
         },
       }),
       [originalsMovie?.backdrop_path]

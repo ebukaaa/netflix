@@ -22,7 +22,7 @@ export function useRow({ title, isLarge, fetch }) {
               {((isLarge && posterPath) || (!isLarge && backdropPath)) && (
                 <Image
                   alt={name}
-                  src={`${process.env.NEXT_PUBLIC_tmdbImageURL}${
+                  src={`${process.env.NEXT_PUBLIC_TMDB_IMAGE_URL}${
                     isLarge ? posterPath : backdropPath
                   }`}
                   height={isLarge ? 250 : 100}

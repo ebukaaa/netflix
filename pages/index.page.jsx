@@ -28,34 +28,34 @@ export async function getStaticProps() {
     },
   } = appProps();
 
-  const orginalsResponse = await fetch(process.env.tmdbURL + originals);
+  const orginalsResponse = await fetch(process.env.TMDB_URL + originals);
   const { results: originalsResults } = await orginalsResponse.json();
   const { floor, random } = Math;
   const originalsMovie =
     originalsResults[floor(random() * originalsResults?.length - 1)];
 
-  const trendingResponse = await fetch(process.env.tmdbURL + trending);
+  const trendingResponse = await fetch(process.env.TMDB_URL + trending);
   const { results: trendingResults } = await trendingResponse.json();
 
-  const topRatedResponse = await fetch(process.env.tmdbURL + topRated);
+  const topRatedResponse = await fetch(process.env.TMDB_URL + topRated);
   const { results: topRatedResults } = await topRatedResponse.json();
 
-  const actionMoviesResponse = await fetch(process.env.tmdbURL + actionMovies);
+  const actionMoviesResponse = await fetch(process.env.TMDB_URL + actionMovies);
   const { results: actionMoviesResults } = await actionMoviesResponse.json();
 
-  const comedyMoviesResponse = await fetch(process.env.tmdbURL + comedyMovies);
+  const comedyMoviesResponse = await fetch(process.env.TMDB_URL + comedyMovies);
   const { results: comedyMoviesResults } = await comedyMoviesResponse.json();
 
-  const horrorMoviesResponse = await fetch(process.env.tmdbURL + horrorMovies);
+  const horrorMoviesResponse = await fetch(process.env.TMDB_URL + horrorMovies);
   const { results: horrorMoviesResults } = await horrorMoviesResponse.json();
 
   const romanceMoviesResponse = await fetch(
-    process.env.tmdbURL + romanceMovies
+    process.env.TMDB_URL + romanceMovies
   );
   const { results: romanceMoviesResults } = await romanceMoviesResponse.json();
 
   const documentariesResponse = await fetch(
-    process.env.tmdbURL + documentaries
+    process.env.TMDB_URL + documentaries
   );
   const { results: documentariesResults } = await documentariesResponse.json();
 
