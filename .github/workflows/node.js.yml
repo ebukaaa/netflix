@@ -24,7 +24,7 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - run: npm ci
-      - run: npm run build --if-present
+      # - run: npm run build --if-present
     env:
       NEXT_PUBLIC_TMDB_IMAGE_URL: ${{ secrets.NEXT_PUBLIC_TMDB_IMAGE_URL }},
       TMDB_API_CALL: ${{ secrets.TMDB_API_CALL }},
