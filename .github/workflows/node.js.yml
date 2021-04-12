@@ -24,7 +24,7 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - run: npm ci
-      # - run: npm run build --if-present
+      - run: npm run build --if-present
     env:
       NEXT_PUBLIC_TMDB_IMAGE_URL: ${{ secrets.NEXT_PUBLIC_TMDB_IMAGE_URL }},
       TMDB_API_CALL: ${{ secrets.TMDB_API_CALL }},
@@ -32,5 +32,5 @@ jobs:
       TMDB_LANGUAGE: ${{ secrets.TMDB_LANGUAGE }},
       TMDB_URL: ${{ secrets.TMDB_URL }},
       TMDB_WITH_GENRES: ${{ secrets.TMDB_WITH_GENRES }}
-    # - run: npm run lint
-    # - run: npm test
+    - run: npm run lint
+    - run: npm test
