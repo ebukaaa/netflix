@@ -1,59 +1,58 @@
-// import SWR, { SWRConfig } from "swr";
 import { useEffect, useState } from "react";
-import { useBanner } from "./banner";
+import Router from "next/router";
+import { auth, unmount } from "tools";
 import { useHeader } from "./header";
-import { useRow } from "./row";
-import { request } from "./store/request.store";
-import rows from "./store/rows.json";
-import { homeStyles } from "./style.module.scss";
+import { useContents } from "./contents";
+import { loginStyles } from "./style.module.scss";
 
-let initProps;
-let putProps;
-// let initError;
-// let putError;
+let initUser;
+let putUser;
 
-// async function fetcher(...args) {
-//   return fetch(...args).then((response) => response?.json());
-// }
-
-function unmount({ set, value }) {
-  return () => set(value);
-}
-
-function updateProps({ props, setProps }) {
-  if (initProps !== props) {
-    initProps = props;
+function updateUser({ isUser, setUser }) {
+  if (initUser !== isUser) {
+    initUser = isUser;
   }
-  if (setProps && putProps !== setProps) {
-    putProps = setProps;
+  if (setUser && putUser !== setUser) {
+    putUser = setUser;
   }
 }
 
-export function useStore({ data }) {
-  const [props, setProps] = useState(data);
-  updateProps({ props, setProps });
-  useEffect(() => unmount({ set: setProps }), []);
-  useEffect(() => updateProps({ props }), [props]);
-
+export function useStore() {
   return {
-    homeStyles,
-    rows,
-    Header: useHeader,
-    Banner: useBanner,
-    Row: useRow,
+    loginStyles,
+    Contents: useContents,
   };
 }
-// export function useAppStore() {
-//   return {
-//     SWRConfig,
-//     fetcher,
-//   };
-// }
+export function useAppStore() {
+  const [isUser, setUser] = useState(null);
+  updateUser({ isUser, setUser });
+  useEffect(() => unmount({ set: setUser }), []);
+  useEffect(() => updateUser({ isUser }), [isUser]);
+
+  useEffect(() => {
+    const unsubscribe = auth().onAuthStateChanged((user) => {
+      if (user) {
+        const { email, uid: id } = user;
+
+        setUser({
+          id,
+          email,
+        });
+        Router.replace("/dashboard");
+      } else {
+        setUser(null);
+      }
+    });
+    return unsubscribe;
+  }, []);
+
+  return {
+    Header: useHeader,
+  };
+}
 export function useProps() {
   return {
-    initProps,
-    putProps,
-    request,
-    unmount,
+    initUser,
+    putUser,
   };
 }

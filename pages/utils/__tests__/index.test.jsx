@@ -1,11 +1,11 @@
 import { shallow } from "enzyme";
-import { useHome } from "../../index.page";
+import { useLogin } from "../../index.page";
 
 describe("useHome", () => {
   it("renders", () => {
-    const Home = useHome;
+    const Login = useLogin;
 
-    const wrapper = shallow(<Home />);
+    const wrapper = shallow(<Login />);
     expect(wrapper.isEmptyRender()).toBeFalsy();
   });
 });

@@ -13,6 +13,8 @@
   }
 
   .contentsStyles {
+    @import "./styles";
+
     svg {
       position: fixed;
 
@@ -21,9 +23,7 @@
         top: 1.6rem;
       }
       &:last-child {
-        top: 1.4rem;
-        right: 1.25rem;
-        width: 1.8rem;
+        @include useRight();
       }
     }
   }
