@@ -1,6 +1,8 @@
 import { useEffect, useMemo, useState } from "react";
-import { useSVGs } from "../../svgs";
+import Router from "next/router";
+import { useLogo, useAvatar, unmount } from "tools";
 import { useProps as useAppProps } from "../..";
+import { useButton } from "./button";
 import {
   headerStyles,
   contentsStyles,
@@ -9,6 +11,13 @@ import {
 
 let initShow;
 let putShown;
+
+function onProfile() {
+  Router.push("/profile");
+}
+function onDashboard() {
+  Router.push("/dashboard");
+}
 
 function updateShown({ isShown, show }) {
   if (initShow !== isShown) {
@@ -36,13 +45,12 @@ function onScroll() {
 }
 
 export function useStore() {
-  const { unmount } = useAppProps();
+  const { initUser: isUser } = useAppProps();
+
   const [isShown, show] = useState(false);
   updateShown({ isShown, show });
-  useEffect(() => unmount({ set: show }), [unmount]);
+  useEffect(() => unmount({ set: show }), []);
   useEffect(() => updateShown({ isShown }), [isShown]);
-
-  const { useLogo, useAvatar } = useSVGs();
 
   useEffect(() => {
     const { addEventListener, removeEventListener } = window;
@@ -56,7 +64,11 @@ export function useStore() {
       isShown,
     ]),
     contentsStyles,
+    isUser,
     Avatar: useAvatar,
     Logo: useLogo,
+    Button: useButton,
+    onProfile,
+    onDashboard,
   };
 }

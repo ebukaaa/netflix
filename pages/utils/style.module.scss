@@ -1,6 +1,28 @@
-.homeStyles {
+.loginStyles {
+  flex: 1;
+  background: url("https://assets.nflxext.com/ffe/siteui/vlv3/92bb3a0b-7e91-40a0-b27b-f2c3ac9ef6e4/e75c587f-468b-41fb-903d-3ddeccb616be/GB-en-20210322-popsignuptwoweeks-perspective_alpha_website_medium.jpg")
+    center no-repeat;
+  background-size: cover;
+  position: relative;
+  color: white;
   display: flex;
   flex-direction: column;
-  overflow: hidden;
-  flex: 1;
+  justify-content: center;
+  align-items: center;
+  padding: 0 1.25rem;
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: rgba(0, 0, 0, $alpha: 0.4)
+      linear-gradient(
+        to top,
+        rgba(0, 0, 0, 0.8) 0,
+        rgba(0, 0, 0, 0) 60%,
+        rgba(0, 0, 0, 0.8) 100%
+      );
+  }
 }
