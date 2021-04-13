@@ -1,5 +1,5 @@
 import Router from "next/router";
-import { auth } from "tools";
+import { auth, db } from "tools";
 import { useProps as useAppProps } from "../../../..";
 import { useInputs } from "./inputs";
 import { useProps as inputsProps } from "./inputs/utils";
@@ -15,20 +15,25 @@ function onSignUp(event) {
     .then(() => {})
     .catch((error) => alert(error.message));
 }
-function onSignIn(event) {
+async function onSignIn(event) {
   event.preventDefault();
   const { initInputs } = inputsProps();
   const { email, password } = initInputs;
 
-  auth()
+  await auth()
     .signInWithEmailAndPassword(email, password)
     .then(({ user: { email: userEmail, uid: id } }) => {
       const { putUser } = useAppProps();
-      putUser({
+      const newUser = {
         id,
         email: userEmail,
+      };
+      putUser(newUser);
+
+      Router.replace({
+        pathname: "/dashboard",
+        query: { id },
       });
-      Router.push("/dashboard");
     })
     .catch((error) => alert(error.message));
 }

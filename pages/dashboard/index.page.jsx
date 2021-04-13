@@ -16,7 +16,7 @@ export function useDashboard(props) {
   );
 }
 
-export async function getStaticProps() {
+export async function getServerSideProps({ query }) {
   const {
     request: {
       originals,
@@ -28,13 +28,49 @@ export async function getStaticProps() {
       romanceMovies,
       documentaries,
     },
+    db,
   } = dashboardProps();
+  const { id } = query;
+
+  let subscription;
+
+
+    await db
+      .collection("customers")
+      .doc(id)
+      .collection("subscriptions")
+      .get()
+      .then((docs) =>
+        docs.forEach(async (doc) => {
+          subscription = {
+            role: doc.data().role,
+            current_period_end: doc.data().current_period_end.seconds,
+            current_period_start: doc.data().current_period_start.seconds,
+          };
+        })
+      );
+
+    if (!subscription) {
+      return {
+        redirect: {
+          destination: "/profile",
+          permanent: false,
+        },
+      };
+    }
+  
 
   const orginalsResponse = await fetch(process.env.TMDB_URL + originals);
   const { results: originalsResults } = await orginalsResponse.json();
   const { floor, random } = Math;
-  const originalsMovie =
+
+  let originalsMovie =
     originalsResults[floor(random() * originalsResults?.length - 1)] || {};
+
+  while (originalsMovie?.backdrop_path === undefined) {
+    originalsMovie =
+      originalsResults[floor(random() * originalsResults?.length - 1)];
+  }
 
   const trendingResponse = await fetch(process.env.TMDB_URL + trending);
   const { results: trendingResults } = await trendingResponse.json();
@@ -73,7 +109,7 @@ export async function getStaticProps() {
       romanceMoviesResults,
       documentariesResults,
     },
-    revalidate: 1,
   };
 }
+
 export default useDashboard;

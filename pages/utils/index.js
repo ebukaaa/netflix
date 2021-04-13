@@ -18,6 +18,21 @@ function updateUser({ isUser, setUser }) {
 }
 
 export function useStore() {
+  useEffect(() => {
+    const unsubscribe = auth().onAuthStateChanged((user) => {
+      if (!user) {
+        return;
+      }
+      Router.replace({
+        pathname: "/dashboard",
+        query: {
+          id: user.uid,
+        },
+      });
+    });
+    return unsubscribe;
+  }, []);
+
   return {
     loginStyles,
     Contents: useContents,
@@ -31,17 +46,16 @@ export function useAppStore() {
 
   useEffect(() => {
     const unsubscribe = auth().onAuthStateChanged((user) => {
-      if (user) {
-        const { email, uid: id } = user;
-
-        setUser({
-          id,
-          email,
-        });
-        Router.replace("/dashboard");
-      } else {
+      if (!user) {
         setUser(null);
+        Router.replace("/");
+        return;
       }
+      const { email, uid: id } = user;
+      setUser({
+        id,
+        email,
+      });
     });
     return unsubscribe;
   }, []);

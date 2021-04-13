@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { auth, unmount } from "tools";
+import { auth, unmount, db } from "tools";
 import { request } from "./store/request.store";
 import { useBanner } from "./banner";
 import { useRow } from "./row";
@@ -38,5 +38,6 @@ export function useProps() {
     putProps,
     request,
     auth,
+    db,
   };
 }
