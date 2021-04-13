@@ -9,7 +9,7 @@ function truncate({ value, amount }) {
 export function useStore() {
   const {
     initProps: { originalsMovie },
-  } = useAppProps();
+  } = useAppProps() || {};
 
   return {
     styles: useMemo(

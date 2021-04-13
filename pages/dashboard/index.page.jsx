@@ -1,6 +1,6 @@
 import { useProps as dashboardProps, useStore } from "./utils";
 
-export function useDashboard(props) {
+export function useDashboard(props = {}) {
   const { homeStyles, rows, Banner, Row } = useStore({
     data: props,
   });
@@ -34,31 +34,29 @@ export async function getServerSideProps({ query }) {
 
   let subscription;
 
+  await db
+    .collection("customers")
+    .doc(id)
+    .collection("subscriptions")
+    .get()
+    .then((docs) =>
+      docs.forEach(async (doc) => {
+        subscription = {
+          role: doc.data().role,
+          current_period_end: doc.data().current_period_end.seconds,
+          current_period_start: doc.data().current_period_start.seconds,
+        };
+      })
+    );
 
-    await db
-      .collection("customers")
-      .doc(id)
-      .collection("subscriptions")
-      .get()
-      .then((docs) =>
-        docs.forEach(async (doc) => {
-          subscription = {
-            role: doc.data().role,
-            current_period_end: doc.data().current_period_end.seconds,
-            current_period_start: doc.data().current_period_start.seconds,
-          };
-        })
-      );
-
-    if (!subscription) {
-      return {
-        redirect: {
-          destination: "/profile",
-          permanent: false,
-        },
-      };
-    }
-  
+  if (!subscription) {
+    return {
+      redirect: {
+        destination: "/profile",
+        permanent: false,
+      },
+    };
+  }
 
   const orginalsResponse = await fetch(process.env.TMDB_URL + originals);
   const { results: originalsResults } = await orginalsResponse.json();

@@ -1,6 +1,6 @@
 import { useProps as profileProps, useStore } from "./utils";
 
-export function useProfile(props) {
+export function useProfile(props = {}) {
   const { profileStyles, Loading, Main } = useStore({ data: props });
 
   return (
