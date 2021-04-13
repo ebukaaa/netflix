@@ -1,0 +1,81 @@
+.mainStyles {
+  color: white;
+  align-self: center;
+  min-width: 26.875rem;
+  width: 60%;
+  max-width: 50rem;
+  margin: auto 0;
+  transition: opacity 0.3s ease-out;
+  &.opaque {
+    opacity: 0.4;
+  }
+  @mixin useHeader {
+    border-bottom: 0.0625rem solid #282c2d;
+  }
+
+  h1 {
+    @include useHeader();
+    font-size: 3.75rem;
+    font-weight: 400;
+    margin-bottom: 1.25rem;
+  }
+
+  .leftStyles {
+    display: flex;
+
+    svg {
+      width: 5rem;
+      height: 5rem;
+    }
+    section {
+      margin-left: 1.5625rem;
+      flex: 1;
+
+      h2 {
+        background: grey;
+        padding: 0.9375rem;
+        font-size: 0.9375rem;
+        padding-left: 1.25rem;
+      }
+
+      .plansStyles {
+        margin-top: 1.25rem;
+
+        h3 {
+          @include useHeader();
+          padding-bottom: 0.625rem;
+        }
+        ul {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 1.25rem;
+          opacity: 0.8;
+          transition: opacity 0.2s ease-out;
+          &:hover {
+            opacity: 1;
+          }
+
+          .subscribeStyles {
+            width: unset;
+            &.disable {
+              background: gray;
+              cursor: not-allowed;
+            }
+          }
+        }
+
+        button {
+          @import "styles/variables";
+          padding: 0.625rem 1.25rem;
+          font-size: 1rem;
+          margin-top: 5%;
+          width: 100%;
+          color: #fff;
+          background: $miyamoto-red;
+          font-weight: 600;
+        }
+      }
+    }
+  }
+}

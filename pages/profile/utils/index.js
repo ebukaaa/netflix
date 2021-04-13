@@ -1,42 +1,41 @@
-import Router from "next/router";
-import { useAvatar, auth } from "tools";
-import { useProps as useAppProps } from "../../utils";
+import { db, unmount } from "tools";
+import dynamic from "next/dynamic";
+import { useEffect, useState } from "react";
 import { profileStyles } from "./style.module.scss";
 
-let init;
-let put;
+let initProps;
+let putProps;
 
-function onSignOut() {
-  Router.replace("/");
-  auth().signOut();
+const useMain = dynamic(() => import("./main").then((mod) => mod.useMain));
+const useLoading = dynamic(() =>
+  import("./loading").then((mod) => mod.useLoading)
+);
+
+function updateProps({ props, setProps }) {
+  if (initProps !== props) {
+    initProps = props;
+  }
+  if (setProps && putProps !== setProps) {
+    putProps = setProps;
+  }
 }
 
-// function update({ value, set }) {
-//   if (init !== value) {
-//     init = value;
-//   }
-//   if (set && put !== set) {
-//     put = set;
-//   }
-// }
-
-export function useStore() {
-  const { initUser: user } = useAppProps();
-  // const [value, set] = useState(false);
-  // update({ value, set });
-  // useEffect(() => unmount({ set: set }), [unmount]);
-  // useEffect(() => update({ value }), [value]);
+export function useStore({ data }) {
+  const [props, setProps] = useState(data);
+  updateProps({ props, setProps });
+  useEffect(() => unmount({ set: setProps }), []);
+  useEffect(() => updateProps({ props }), [props]);
 
   return {
     profileStyles,
-    email: user?.email,
-    Avatar: useAvatar,
-    onSignOut,
+    Loading: useLoading,
+    Main: useMain,
   };
 }
 export function useProps() {
   return {
-    init,
-    put,
+    initProps,
+    putProps,
+    db,
   };
 }
