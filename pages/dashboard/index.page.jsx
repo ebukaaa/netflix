@@ -7,6 +7,8 @@ export function useDashboard(props = {}) {
 
   return (
     <main className={homeStyles}>
+      <title>Dashboard</title>
+
       <Banner />
 
       {rows.map(({ title, isLarge, fetch }) => (

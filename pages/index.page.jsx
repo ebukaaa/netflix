@@ -5,6 +5,8 @@ export function useLogin() {
 
   return (
     <main className={loginStyles}>
+      <title>Ebuka - Netflix</title>
+
       <Contents />
     </main>
   );
