@@ -1,6 +1,6 @@
 {
   "name": "netflix",
-  "version": "4.0.0",
+  "version": "4.0.1",
   "author": {
     "name": "Ebuka Isiadinso",
     "email": "ebukaa@protonmail.com"
@@ -16,7 +16,7 @@
     "add-electron": "npx cap add electron",
     "add-ios": "npx cap add ios",
     "audit": "npm audit fix",
-    "build": "next build && next export",
+    "build": "next build",
     "clear-react-import": "npx react-codemod update-react-imports",
     "copy-capacitor": "npx cap copy",
     "dev": "next dev -p 9654",
