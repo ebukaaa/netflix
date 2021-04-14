@@ -5,6 +5,8 @@ export function useProfile(props = {}) {
 
   return (
     <main className={profileStyles}>
+      <title>Profile</title>
+
       <Loading />
       <Main />
     </main>
