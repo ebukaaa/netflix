@@ -18,6 +18,8 @@ let initOpaque;
 let putOpaque;
 
 function onSignOut() {
+  const { putUser } = appProps();
+  putUser(null);
   Router.replace("/");
   auth().signOut();
 }
