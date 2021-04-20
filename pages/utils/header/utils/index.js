@@ -10,7 +10,7 @@ import {
 } from "./style.module.scss";
 import { useProps as loadingProps } from "../../../profile/utils/loading/utils";
 import { useProps as mainProfileProps } from "../../../profile/utils/main/utils";
-import { useProps as profileProps } from "../../../profile/utils";
+// import { useProps as profileProps } from "../../../profile/utils";
 
 let initShow;
 let putShown;
@@ -29,16 +29,16 @@ function onProfile() {
 }
 function onDashboard() {
   const { initUser: user } = appProps();
-  const {
-    initProps: { subscription },
-  } = profileProps();
+  // const {
+  // initProps: { subscription },
+  // } = profileProps();
 
-  if (subscription) {
-    const { putShow } = loadingProps();
-    const { putOpaque } = mainProfileProps();
-    putOpaque(true);
-    putShow(true);
-  }
+  // if (subscription) {
+  const { putShow } = loadingProps();
+  const { putOpaque } = mainProfileProps();
+  putOpaque(true);
+  putShow(true);
+  // }
   Router.push({
     pathname: "/dashboard",
     query: { id: user.id },
